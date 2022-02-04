@@ -5,6 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 ;
@@ -59,8 +62,22 @@ public class PassengerTest {
         int seatNumber = passenger.getSeatNumber();
         assertTrue(seatNumber < flight.getPlane().getCapacity());
         assertTrue(seatNumber > 0);
+    }
 
-        //TODO add 100 passengers and check for all seats unique
+    @Test
+    public void noDoubleBookingsTrue(){
+        //book all the seats
+        passengers.clear();
+        for(int i = 0; i < flight.getPlane().getCapacity(); i++)
+            flight.addPassenger(new Passenger("Robot",1));
 
+        //check if all seat numbers are unique
+        Set<Integer> uniques = new HashSet<Integer>();
+        for (Passenger passenger : flight.getPassengers())
+            uniques.add(passenger.getSeatNumber());
+
+        //set size will match plane capacity if we have been successful
+        //sets will not add any duplicates
+        assertEquals(flight.getPlane().getCapacity(), uniques.size());
     }
 }
