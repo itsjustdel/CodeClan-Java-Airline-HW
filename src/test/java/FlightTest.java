@@ -120,18 +120,4 @@ public class FlightTest {
     public void hasDate() {
         assertEquals(this.departureTime, flight.getDepartureTime());
     }
-
-    @Test
-    public void canNotBookSameSeatTwice() {
-        passengers.clear();
-
-        Passenger passenger9a = new Passenger("Bob",4);
-        Passenger passenger9b = new Passenger("Bobby",2);
-
-        flight.addPassenger(passenger9a);
-        flight.addPassenger(passenger9b);
-
-        //use NOT to check second passenger was not assigned seat 9
-        assertNotEquals(9, passenger9b.getSeatNumber());
-    }
 }
